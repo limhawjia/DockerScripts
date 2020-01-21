@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Listing your containers.."
+
+echo
+docker ps
+echo
+
+echo 'Gathering credentials...'
+
+read -p 'Container name: ' container
+read -p 'Database name: ' database
+read -p 'Username: ' uservar
+
+docker exec -it $container psql -U $uservar -W $database
+

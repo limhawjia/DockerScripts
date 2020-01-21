@@ -1,0 +1,32 @@
+#!/bin/bash
+
+read -p "This will delete ALL containers, images and volumes. Are you sure you wish to proceed? [y/N] " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    containers=$(docker container ls -aq)
+
+    if [ -z containers ]
+    then
+        docker container stop containers
+    else
+        echo "No running containers found"
+    fi
+
+    echo "Running system prune..."
+    yes | docker system prune -a --volumes >/dev/null 
+
+    exit 0
+fi
+
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+    echo "Aborting operation..."
+    exit 0
+fi
+
+echo "Unrecognized command, aborting operation..."
+exit 1
+
+

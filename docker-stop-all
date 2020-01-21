@@ -1,0 +1,11 @@
+#!/bin/bash
+
+containers=$(docker container ls -aq)
+
+if [ -z containers ]
+then
+    echo "No running containers found!"
+else
+    docker container stop $(docker container ls -aq)
+fi
+
