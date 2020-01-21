@@ -9,9 +9,9 @@ then
 
     if [ -z containers ]
     then
-        docker container stop containers
-    else
         echo "No running containers found"
+    else
+        docker container stop containers
     fi
 
     echo "Running system prune..."
